@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	const itemsContainer = document.getElementById("items-container");
 	const searchInput = document.getElementById("search");
 
+	let items = []; // Declare items here, in the global scope
+
 	async function fetchItems() {
 		try {
 			const response = await fetch(
@@ -20,7 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
 				);
 			}
 
-			displayItems(data);
+			items = data; // Assign the fetched data to the global items variable
+			displayItems(items); // Display the fetched items
 		} catch (error) {
 			console.error("Error fetching items:", error);
 		}
@@ -39,22 +42,24 @@ document.addEventListener("DOMContentLoaded", function () {
 				: "";
 
 			itemDiv.innerHTML = `
-            <h3>${item.Name}</h3>
-            <p>${item.Description}</p>
-            ${image}  <!-- This will display the image if available -->
-        `;
+                <h3>${item.Name}</h3>
+                <p>${item.Description}</p>
+                ${image}  <!-- This will display the image if available -->
+            `;
 			itemsContainer.appendChild(itemDiv);
 		});
-
-		searchInput.addEventListener("keyup", function () {
-			const query = searchInput.value.toLowerCase();
-			const filteredItems = items.filter(
-				(item) =>
-					item.Name.toLowerCase().includes(query) ||
-					item.Description.toLowerCase().includes(query)
-			);
-			displayItems(filteredItems);
-		});
 	}
-	fetchItems();
+
+	// Handle search functionality
+	searchInput.addEventListener("keyup", function () {
+		const query = searchInput.value.toLowerCase();
+		const filteredItems = items.filter(
+			(item) =>
+				item.Name.toLowerCase().includes(query) ||
+				item.Description.toLowerCase().includes(query)
+		);
+		displayItems(filteredItems); // Display filtered items
+	});
+
+	fetchItems(); // Fetch items when the page loads
 });

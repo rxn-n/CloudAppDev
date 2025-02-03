@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Lost & Found Item</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <h2>Upload Lost and Found Item</h2>
+
+    <form id="upload-form" onsubmit="uploadImage(event)">
+        <label for="item-name">Item Name:</label>
+        <input type="text" id="item-name" name="item-name" required><br>
+
+        <label for="item-description">Item Description:</label>
+        <textarea id="item-description" name="item-description" required></textarea><br>
+
+        <label for="image-upload">Choose an image:</label>
+        <input type="file" id="image-upload" name="image" accept="image/*" required><br>
+
+        <button type="submit">Upload Item</button>
+    </form>
+
+    <script src="upload.js"></script>
+</body>
+</html>

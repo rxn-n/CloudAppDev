@@ -55,6 +55,7 @@ async function uploadImageToS3(file) {
 // Step 2: Add item details to DynamoDB
 async function addItemToDynamoDB(item) {
 	try {
+		console.log(item);
 		const response = await fetch("https://508qfwa0x8.execute-api.us-east-1.amazonaws.com/productions", {
 			method: "POST",
 			headers: {

@@ -40,3 +40,11 @@ main {
     width: 250px;
     text-align: left;
 }
+
+/* Style for images inside the item card */
+.item-image {
+    width: 100%; /* Make the image fill the container */
+    height: auto;
+    max-height: 200px;
+    object-fit: cover; /* Keeps the aspect ratio intact */
+}

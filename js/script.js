@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	async function fetchItems() {
 		try {
 			const response = await fetch(
-				"https://508qfwa0x8.execute-api.us-east-1.amazonaws.com/productions"
+				"https://508qfwa0x8.execute-api.us-east-1.amazonaws.com/productions/getLostItems"
 			); // Replace with your API URL
 			const data = await response.json();
 			console.log("Fetched data:", data); // Debugging line

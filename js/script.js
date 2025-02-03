@@ -6,23 +6,20 @@ document.addEventListener("DOMContentLoaded", function () {
 		try {
 			const response = await fetch(
 				"https://508qfwa0x8.execute-api.us-east-1.amazonaws.com/productions"
-			); // Replace with your API Gateway URL
+			); // Replace with your API URL
 			const data = await response.json();
+			console.log("Fetched data:", data); // Debugging line
+			if (!Array.isArray(data)) {
+				throw new Error(
+					"Expected an array but received: " + JSON.stringify(data)
+				);
+			}
 			displayItems(data);
 		} catch (error) {
 			console.error("Error fetching items:", error);
 		}
 	}
 
-	function displayItems(filteredItems) {
-		itemsContainer.innerHTML = "";
-		filteredItems.forEach((item) => {
-			const itemDiv = document.createElement("div");
-			itemDiv.classList.add("item");
-			itemDiv.innerHTML = `<h3>${item.name}</h3><p>${item.description}</p>`;
-			itemsContainer.appendChild(itemDiv);
-		});
-	}
 
 	searchInput.addEventListener("keyup", function () {
 		const query = searchInput.value.toLowerCase();

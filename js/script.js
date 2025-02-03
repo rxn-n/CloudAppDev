@@ -6,19 +6,26 @@ document.addEventListener("DOMContentLoaded", function () {
 		try {
 			const response = await fetch(
 				"https://508qfwa0x8.execute-api.us-east-1.amazonaws.com/productions/getItems"
-			); // Replace with your API URL
-			const data = await response.json();
-			console.log("Fetched data:", data); // Debugging line
+			);
+			const rawData = await response.json();
+			console.log("Fetched data:", rawData); // Debugging line
+
+			// Check if response has a "body" field
+			const data = rawData.body ? JSON.parse(rawData.body) : rawData;
+			console.log("Parsed data:", data); // Debugging line
+
 			if (!Array.isArray(data)) {
 				throw new Error(
 					"Expected an array but received: " + JSON.stringify(data)
 				);
 			}
+
 			displayItems(data);
 		} catch (error) {
 			console.error("Error fetching items:", error);
 		}
 	}
+
 
 
 	searchInput.addEventListener("keyup", function () {

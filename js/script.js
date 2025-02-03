@@ -28,13 +28,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function displayItems(filteredItems) {
-        itemsContainer.innerHTML = "";
-        filteredItems.forEach((item) => {
-            const itemDiv = document.createElement("div");
-            itemDiv.classList.add("item");
-            itemDiv.innerHTML = `<h3>${item.name}</h3><p>${item.description}</p>`;
-            itemsContainer.appendChild(itemDiv);
-        });
+        filteredItems.forEach((wrapper) => {
+			const item = wrapper.Item; // Extracting the actual data
+			console.log(item); // Debugging line
+			const itemDiv = document.createElement("div");
+			itemDiv.classList.add("item");
+			itemDiv.innerHTML = `<h3>${item.name}</h3><p>${item.description}</p>`;
+			itemsContainer.appendChild(itemDiv);
+		});
     }
 
     searchInput.addEventListener("keyup", function () {

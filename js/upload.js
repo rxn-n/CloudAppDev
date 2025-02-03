@@ -63,14 +63,17 @@ async function addItemToDynamoDB(item) {
 			body: JSON.stringify(item), // Convert object to JSON
 		});
 
+		console.log("sent response:", response);
+
 		const data = await response.json();
 		console.log("DynamoDB response:", data);
 
 		if (!response.ok) {
 			throw new Error("Error adding item to DynamoDB: " + data.error);
 		}
-
-		alert("Item successfully added!");
+		else {
+			alert("Item successfully added!");
+		}
 	} catch (error) {
 		console.error("Error adding item to DynamoDB:", error);
 		alert("Failed to add item.");

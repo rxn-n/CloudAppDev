@@ -37,8 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			itemDiv.classList.add("item");
 
 			// Use item.Name and item.Description as before
-			const image = item.ImageURL
-				? `<img src="${item.ImageURL}" alt="${item.Name}" class="item-image">`
+			const image = item.ItemURL
+				? `<img src="${item.ItemURL}" alt="${item.Name}" class="item-image">`
 				: "";
 
 			itemDiv.innerHTML = `

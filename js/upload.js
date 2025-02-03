@@ -62,7 +62,7 @@ async function addItemToDynamoDB(item) {
 		body: JSON.stringify({
 			Name: itemName,
 			Description: itemDescription,
-			ItemURL: imageURL, // Ensure this field is correctly populated
+			ItemURL: itemUrl, // Ensure this field is correctly populated
 		}),
 	});
 

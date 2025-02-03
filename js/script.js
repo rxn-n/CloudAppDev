@@ -28,15 +28,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function displayItems(filteredItems) {
-        filteredItems.forEach((wrapper) => {
-			const item = wrapper.Item; // Extracting the actual data
-			console.log(item); // Debugging line
-			const itemDiv = document.createElement("div");
-			itemDiv.classList.add("item");
-			itemDiv.innerHTML = `<h3>${item.name}</h3><p>${item.description}</p>`;
-			itemsContainer.appendChild(itemDiv);
-		});
-    }
+			itemsContainer.innerHTML = "";
+			filteredItems.forEach((item) => {
+				console.log(item); // Check the structure in the console
+				const itemDiv = document.createElement("div");
+				itemDiv.classList.add("item");
+				// Use item.Name and item.Description as per the API response
+				itemDiv.innerHTML = `<h3>${item.Name}</h3><p>${item.Description}</p>`;
+				itemsContainer.appendChild(itemDiv);
+			});
+		}
+
 
     searchInput.addEventListener("keyup", function () {
         const query = searchInput.value.toLowerCase();

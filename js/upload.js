@@ -54,16 +54,18 @@ async function uploadImageToS3(file) {
 
 // Step 2: Add item details to DynamoDB
 async function addItemToDynamoDB(item) {
-	const response = await fetch(
-		"https://508qfwa0x8.execute-api.us-east-1.amazonaws.com/productions",
-		{
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(item),
-		}
-	);
+	fetch("https://508qfwa0x8.execute-api.us-east-1.amazonaws.com/productions", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json", // Add this header
+		},
+		body: JSON.stringify({
+			Name: itemName,
+			Description: itemDescription,
+			ItemURL: imageURL, // Ensure this field is correctly populated
+		}),
+	});
+
 	console.log(JSON.stringify(item));
 
 	const data = await response.json();

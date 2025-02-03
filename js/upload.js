@@ -59,11 +59,8 @@ async function addItemToDynamoDB(item) {
 		headers: {
 			"Content-Type": "application/json", // Add this header
 		},
-		body: JSON.stringify({
-			Name: itemName,
-			Description: itemDescription,
-			ItemURL: itemUrl, // Ensure this field is correctly populated
-		}),
+		body: 
+		item
 	});
 
 	console.log(JSON.stringify(item));

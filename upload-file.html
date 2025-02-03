@@ -9,18 +9,19 @@
 <body>
     <h2>Upload Lost and Found Item</h2>
 
-    <form id="upload-form" onsubmit="uploadImage(event)">
-        <label for="item-name">Item Name:</label>
-        <input type="text" id="item-name" name="item-name" required><br>
+    <form id="item-form">
+    <h2>Submit a Lost Item</h2>
+    <label for="itemName">Item Name:</label>
+    <input type="text" id="itemName" name="itemName" required>
+    
+    <label for="itemDescription">Item Description:</label>
+    <textarea id="itemDescription" name="itemDescription" required></textarea>
 
-        <label for="item-description">Item Description:</label>
-        <textarea id="item-description" name="item-description" required></textarea><br>
+    <label for="itemImage">Item Image:</label>
+    <input type="file" id="itemImage" name="itemImage" accept="image/*" required>
 
-        <label for="image-upload">Choose an image:</label>
-        <input type="file" id="image-upload" name="image" accept="image/*" required><br>
-
-        <button type="submit">Upload Item</button>
-    </form>
+    <button type="submit">Submit Item</button>
+</form>
 
     <script src="upload.js"></script>
 </body>

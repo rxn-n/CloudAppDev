@@ -14,19 +14,16 @@ itemForm.addEventListener("submit", async function (event) {
 	}
 
 	// Step 1: Upload the image to S3
-	const imageUrl = await uploadImageToS3(itemImage);
+	const itemUrl = await uploadImageToS3(itemImage);
 
-	// Step 2: Store item details in DynamoDB
+	// Step 2: Store item details in DynamoDB	
 	const item = {
 		Name: itemName,
 		Description: itemDescription,
-		ImageURL: imageUrl,
+		ItemURL: itemUrl,
 	};
 
 	await addItemToDynamoDB(item);
-
-	// Refresh the item list
-	fetchItems();
 });
 
 // Step 1: Upload image to S3
@@ -67,6 +64,7 @@ async function addItemToDynamoDB(item) {
 			body: JSON.stringify(item),
 		}
 	);
+	console.log(JSON.stringify(item));
 
 	const data = await response.json();
 	console.log("DynamoDB response:", data);

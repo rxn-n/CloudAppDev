@@ -2,11 +2,17 @@ document.addEventListener("DOMContentLoaded", function () {
 	const itemsContainer = document.getElementById("items-container");
 	const searchInput = document.getElementById("search");
 
-	const items = [
-		{ name: "Wallet", description: "Black leather wallet found in cafeteria" },
-		{ name: "Keys", description: "Set of car keys with a blue keychain" },
-		{ name: "Phone", description: "iPhone 12 found near reception" },
-	];
+	async function fetchItems() {
+		try {
+			const response = await fetch(
+				"https://uzqu49prib.execute-api.us-east-1.amazonaws.com/default/fetchItemInfo"
+			); // Replace with your API Gateway URL
+			const data = await response.json();
+			displayItems(data);
+		} catch (error) {
+			console.error("Error fetching items:", error);
+		}
+	}
 
 	function displayItems(filteredItems) {
 		itemsContainer.innerHTML = "";
@@ -28,5 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		displayItems(filteredItems);
 	});
 
-	displayItems(items);
+	// Fetch items when the page loads
+	fetchItems();
 });

@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <h3>${item.Name}</h3>
                 <p>${item.Description}</p>
                 ${image}  <!-- This will display the image if available -->
+
             `;
 			itemsContainer.appendChild(itemDiv);
 		});
@@ -56,7 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		const filteredItems = items.filter(
 			(item) =>
 				item.Name.toLowerCase().includes(query) ||
-				item.Description.toLowerCase().includes(query)
+				item.Description.toLowerCase().includes(query) ||
+				item.Tags.toLowerCase().includes(query)
 		);
 		displayItems(filteredItems); // Display filtered items
 	});

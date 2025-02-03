@@ -15,15 +15,25 @@ itemForm.addEventListener("submit", async function (event) {
 
 	// Step 1: Upload the image to S3
 	const itemUrl = await uploadImageToS3(itemImage);
+	if (!itemUrl) {
+		alert("Failed to upload image. Please try again.");
+		return;
+	}
 
-	// Step 2: Store item details in DynamoDB	
+	const itemTags = getSelectedTags(); // Call this function before submitting the form
+
 	const item = {
 		Name: itemName,
 		Description: itemDescription,
 		ItemURL: itemUrl,
+		Tags: itemTags, // Send tags as an array
 	};
 
-	await addItemToDynamoDB(item);
+	const success = await addItemToDynamoDB(item);
+	if (success) {
+		alert("Item successfully added!");
+		window.location.href = "index.html"; // Redirect to homepage
+	}
 });
 
 // Step 1: Upload image to S3
@@ -32,7 +42,6 @@ async function uploadImageToS3(file) {
 	const s3Url = `https://lost-and-found-images-bucket.s3.us-east-1.amazonaws.com/${fileName}`;
 
 	try {
-		// You can use AWS SDK here to directly upload the file to S3
 		const s3UploadResponse = await fetch(s3Url, {
 			method: "PUT",
 			body: file,
@@ -52,19 +61,26 @@ async function uploadImageToS3(file) {
 	}
 }
 
-// Step 2: Add item details to DynamoDB
+// Step 2: Storing the tags
+
+function getSelectedTags() {
+	const checkboxes = document.querySelectorAll('input[name="tags"]:checked');
+	return Array.from(checkboxes).map((cb) => cb.value);
+	}
+
+// Step 3: Add item details to DynamoDB
 async function addItemToDynamoDB(item) {
 	try {
-		console.log(item);
-		const response = await fetch("https://508qfwa0x8.execute-api.us-east-1.amazonaws.com/productions", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json", // Ensure JSON content type
-			},
-			body: JSON.stringify(item), // Convert object to JSON
-		});
-
-		console.log("sent response:", response);
+		const response = await fetch(
+			"https://508qfwa0x8.execute-api.us-east-1.amazonaws.com/productions",
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(item),
+			}
+		);
 
 		const data = await response.json();
 		console.log("DynamoDB response:", data);
@@ -72,11 +88,11 @@ async function addItemToDynamoDB(item) {
 		if (!response.ok) {
 			throw new Error("Error adding item to DynamoDB: " + data.error);
 		}
-		else {
-			alert("Item successfully added!");
-		}
+
+		return true;
 	} catch (error) {
 		console.error("Error adding item to DynamoDB:", error);
 		alert("Failed to add item.");
+		return false;
 	}
 }

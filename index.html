@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lost & Found</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-    <header>
-        <h1>Lost & Found</h1>
-        <p>Could these be yours?</p>
-    </header>
-    
-    <main>
-        <input type="text" id="search" placeholder="Search items...">
-        <a href="upload-file.html">Upload Item</a>
-        <div id="items-container">
-            <!-- Items will be dynamically inserted here -->
-        </div>
-    </main>
-    
-    <script src="js/script.js"></script>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Lost & Found</title>
+		<link rel="stylesheet" href="css/styles.css" />
+	</head>
+	<body>
+		<header>
+			<h1>Lost & Found</h1>
+			<p>Could these be yours?</p>
+		</header>
+
+		<main>
+			<input type="text" id="search" placeholder="Search items..." />
+			<div id="submitted-tags">
+				<h3>Selected Tags:</h3>
+				<ul id="tag-list"></ul>
+			</div>
+
+			<a href="upload-file.html">Upload Item</a>
+			<div id="items-container">
+				<!-- Items will be dynamically inserted here -->
+			</div>
+		</main>
+
+		<script src="js/script.js"></script>
+	</body>
 </html>

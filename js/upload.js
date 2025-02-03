@@ -32,7 +32,7 @@ itemForm.addEventListener("submit", async function (event) {
 // Step 1: Upload image to S3
 async function uploadImageToS3(file) {
 	const fileName = `lost-item-${Date.now()}-${file.name}`;
-	const s3Url = `https://your-bucket-name.s3.amazonaws.com/${fileName}`;
+	const s3Url = `https://lost-and-found-images-bucket.s3.us-east-1.amazonaws.com/${fileName}`;
 
 	try {
 		// You can use AWS SDK here to directly upload the file to S3

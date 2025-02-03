@@ -7,21 +7,23 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h2>Upload Lost and Found Item</h2>
+    <div class="container">
+        <h2>Upload Lost and Found Item</h2>
 
-    <form id="item-form">
-    <h2>Submit a Lost Item</h2>
-    <label for="itemName">Item Name:</label>
-    <input type="text" id="itemName" name="itemName" required>
-    
-    <label for="itemDescription">Item Description:</label>
-    <textarea id="itemDescription" name="itemDescription" required></textarea>
+        <form id="item-form">
+            <h3>Submit a Lost Item</h3>
+            <label for="itemName">Item Name:</label>
+            <input type="text" id="itemName" name="itemName" required>
 
-    <label for="itemImage">Item Image:</label>
-    <input type="file" id="itemImage" name="itemImage" accept="image/*" required>
+            <label for="itemDescription">Item Description:</label>
+            <textarea id="itemDescription" name="itemDescription" required></textarea>
 
-    <button type="submit">Submit Item</button>
-</form>
+            <label for="itemImage">Item Image:</label>
+            <input type="file" id="itemImage" name="itemImage" accept="image/*" required>
+
+            <button type="submit">Submit Item</button>
+        </form>
+    </div>
 
     <script src="js/upload.js"></script>
 </body>

@@ -54,21 +54,25 @@ async function uploadImageToS3(file) {
 
 // Step 2: Add item details to DynamoDB
 async function addItemToDynamoDB(item) {
-	fetch("https://508qfwa0x8.execute-api.us-east-1.amazonaws.com/productions", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json", // Add this header
-		},
-		body: 
-		item
-	});
+	try {
+		const response = await fetch("https://508qfwa0x8.execute-api.us-east-1.amazonaws.com/productions", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json", // Ensure JSON content type
+			},
+			body: JSON.stringify(item), // Convert object to JSON
+		});
 
-	console.log(JSON.stringify(item));
+		const data = await response.json();
+		console.log("DynamoDB response:", data);
 
-	const data = await response.json();
-	console.log("DynamoDB response:", data);
+		if (!response.ok) {
+			throw new Error("Error adding item to DynamoDB: " + data.error);
+		}
 
-	if (!response.ok) {
-		alert("Error adding item to DynamoDB.");
+		alert("Item successfully added!");
+	} catch (error) {
+		console.error("Error adding item to DynamoDB:", error);
+		alert("Failed to add item.");
 	}
 }

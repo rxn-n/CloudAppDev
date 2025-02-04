@@ -35,7 +35,7 @@ itemForm.addEventListener("submit", async function (event) {
 		window.location.href = "index.html"; // Redirect to homepage
 	}
 });
-
+	
 // Step 1: Upload image to S3
 async function uploadImageToS3(file) {
 	const fileName = `lost-item-${Date.now()}-${file.name}`;
@@ -62,7 +62,7 @@ async function uploadImageToS3(file) {
 }
 
 // Step 2: Storing the tags
-
+x
 function getSelectedTags() {
 	const checkboxes = document.querySelectorAll('input[name="tags"]:checked');
 	return Array.from(checkboxes).map((cb) => cb.value);

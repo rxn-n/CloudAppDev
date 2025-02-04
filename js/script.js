@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			// Parse the body if necessary
 			const data =
 				typeof rawData.body === "string"
-					? JSON.parse(rawData.body).items
-					: rawData.items;
+					? JSON.parse(rawData.body)
+					: rawData.body;
 			console.log("Parsed data:", data); // Debugging
 
 			if (!Array.isArray(data)) {
@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			console.error("Error fetching items:", error);
 		}
 	}
+
 
 	function displayItems(filteredItems) {
 		itemsContainer.innerHTML = "";

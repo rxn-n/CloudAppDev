@@ -9,25 +9,28 @@ document.addEventListener("DOMContentLoaded", function () {
 			const response = await fetch(
 				"https://508qfwa0x8.execute-api.us-east-1.amazonaws.com/productions"
 			);
-			const rawData = await response.json();
-			console.log("Fetched data:", rawData); // Debugging line
+			const text = await response.text(); // First, get the raw text response
 
-			// Extract `body` directly if it exists
-			const data = rawData.body || rawData;
-			console.log("Parsed data:", data); // Debugging line
+			console.log("Raw API response:", text); // Debugging: Check if it's a string
 
-			if (!Array.isArray(data)) {
+			const data = JSON.parse(text); // Manually parse the JSON
+
+			if (!Array.isArray(data.items)) {
+				// ✅ Ensure items is an array
 				throw new Error(
-					"Expected an array but received: " + JSON.stringify(data)
+					`Expected an array but received: ${JSON.stringify(data)}`
 				);
 			}
 
-			items = data; // Assign the fetched data to the global items variable
-			displayItems(items); // Display the fetched items
+			console.log("Fetched items:", data.items);
+
+			// Now display the items correctly
+			displayItems(data.items);
 		} catch (error) {
 			console.error("Error fetching items:", error);
 		}
 	}
+
 
 	function displayItems(filteredItems) {
 		itemsContainer.innerHTML = "";
